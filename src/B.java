@@ -17,7 +17,7 @@ public class B {
 
     final String[] sequences = new String[T];
     for (int t=0;t<T;t++) {
-      sequences[t] = scanner.nextLine();
+      sequences[t] = scanner.nextLine().toLowerCase().trim();
     }
 
     final int[] motif = new int[K+1];
