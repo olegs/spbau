@@ -34,10 +34,6 @@ public class C {
     }
     private char myShortName;
 
-    public String[] getMyCodes() {
-      return myCodes;
-    }
-
     private final String[] myCodes;
 
     // Fill the table
