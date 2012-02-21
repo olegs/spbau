@@ -23,25 +23,25 @@ public class F {
   }
   public static void main(String[] args) {
     final Scanner scanner = new Scanner(new InputStreamReader(System.in));
-    final String s1 = scanner.nextLine();
-    final String s2 = scanner.nextLine();
+    final char[] s1 = scanner.nextLine().toCharArray();
+    final char[] s2 = scanner.nextLine().toCharArray();
 
-    final Data[][] matrix = new Data[s1.length() + 1][s2.length() + 1];
-    for (int i=0;i<s1.length()+1;i++) {
+    final Data[][] matrix = new Data[s1.length + 1][s2.length + 1];
+    for (int i=0;i<s1.length+1;i++) {
       matrix[i][0] = new Data(i, -1);
     }
-    for (int j=0;j<s2.length()+1;j++) {
+    for (int j=0;j<s2.length+1;j++) {
       matrix[0][j] = new Data(j, 1);
     }
 
-    for (int i=1;i<=s1.length();i++) {
-      for (int j=1;j<=s2.length();j++) {
+    for (int i=1;i<=s1.length;i++) {
+      for (int j=1;j<=s2.length;j++) {
         final Data d = new Data(Integer.MAX_VALUE, 0);
         matrix[i][j] = d;
         int value;
         // match or replace
         value = matrix[i-1][j-1].value;
-        if (s1.charAt(i-1) != s2.charAt(j-1)) {
+        if (s1[i-1] != s2[j-1]) {
           value++;
         }
         d.value = value;
@@ -60,16 +60,16 @@ public class F {
         }
       }
     }
-    System.out.println(matrix[s1.length()][s2.length()].value);
+    System.out.println(matrix[s1.length][s2.length].value);
     final StringBuilder builder1 = new StringBuilder();
     final StringBuilder builder2 = new StringBuilder();
-    int i = s1.length();
-    int j = s2.length();
+    int i = s1.length;
+    int j = s2.length;
     while (i > 0 || j > 0) {
       switch (matrix[i][j].direction) {
-        case 0: builder1.insert(0, s1.charAt(i-1)); builder2.insert(0, s2.charAt(j-1)); i--; j--; break;
-        case -1: builder1.insert(0, s1.charAt(i-1)); builder2.insert(0, '-'); i--; break;
-        case 1: builder1.insert(0, '-'); builder2.insert(0, s2.charAt(j-1)); j--; break;
+        case 0: builder1.insert(0, s1[i-1]); builder2.insert(0, s2[j-1]); i--; j--; break;
+        case -1: builder1.insert(0, s1[i-1]); builder2.insert(0, '-'); i--; break;
+        case 1: builder1.insert(0, '-'); builder2.insert(0, s2[j-1]); j--; break;
       }
     }
     System.out.println(builder1.toString());
