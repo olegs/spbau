@@ -1,12 +1,13 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 /**
  * @author oleg
  * @date 2/20/12
  */
 public class C {
+
+  private static final int SIZE = 100000;
+
   static enum AminoAcid {
     Phenylalanine('F', "ttt", "ttc"),
     Leucine('L', "tta", "ttg", "ctt", "ctc", "cta", "ctg"),
@@ -51,10 +52,6 @@ public class C {
       assert count == 64;
     }
 
-    private char getName(){
-      return myShortName;
-    }
-
     public static AminoAcid getByCodon(final char[] chars){
       return ourTable[byChar(chars[0])][byChar(chars[1])][byChar(chars[2])];
     }
@@ -62,6 +59,8 @@ public class C {
 
   public static void main(String[] args) {
     final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    final BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
+    StringBuilder builder = new StringBuilder(SIZE + 1);
     final char[] codon = new char[3];
     boolean startCodonSeen=false;
     try {
@@ -77,9 +76,16 @@ public class C {
           continue;
         }
         if (acid == AminoAcid.STOP){
+          writer.write(builder.toString());
+          writer.flush();
+          writer.close();
           return;
         }
-        System.out.print(acid.myShortName);
+        if (builder.length() > SIZE - 1) {
+          writer.write(builder.toString());
+          builder = new StringBuilder(SIZE + 1);
+        }
+        builder.append(acid.myShortName);
       }
     } catch (IOException e) {
       // ignore
