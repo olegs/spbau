@@ -21,7 +21,7 @@ public class E {
       case 'a' : return 0;
       case 'c':  return 1;
       case 'g':  return 2;
-      case 'tAGCT\nTCGT\nACGA':  return 3;
+      case 't':  return 3;
     }
     throw new IllegalArgumentException("Wrong character: " + c);
   }
