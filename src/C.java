@@ -1,4 +1,6 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * @author oleg
@@ -60,9 +62,7 @@ public class C {
 
   public static void main(String[] args) {
     final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    final BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
     final char[] codon = new char[3];
-    int i = 0;
     boolean startCodonSeen=false;
     try {
       while (true) {
@@ -79,16 +79,10 @@ public class C {
         if (acid == AminoAcid.STOP){
           return;
         }
-        writer.write(acid.myShortName);
+        System.out.print(acid.myShortName);
       }
     } catch (IOException e) {
       // ignore
-    } finally {
-      try {
-        writer.flush();
-      } catch (IOException e) {
-        // Ignore
-      }
     }
   }
 
